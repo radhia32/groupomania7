@@ -36,6 +36,7 @@ if(user.status === 200) {  setError(false)
     localStorage.setItem("USERID", user.data.userId);
     localStorage.setItem("NAME", user.data.lastName);
     localStorage.setItem("LASTNAME", user.data.firstName);
+    localStorage.setItem("ROLE", user.data.role);
     navigate("/")}   
 
 console.log("user =====", user)

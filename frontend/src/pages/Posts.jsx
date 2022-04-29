@@ -41,7 +41,7 @@ const Posts = () => {
                 }
               );
               console.log("newPost", newPost.data);
-              // creation d'un objet dedans on a mis la description saisie et l'id de la
+              // creation d'un objet dedans j'ai mis la description saisie et l'id de la
               // nouvelle pub ajoutée, cet objet sera ajouter dans le tableau posts
               // pour l'affiché avec tous les publication
               const newAddedPost = { description,postId: newPost.data.post.insertId,userId };

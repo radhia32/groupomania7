@@ -7,8 +7,8 @@ const cors = require ('cors');
 const userRoutes = require('./routes/user.js');
 const postRoutes = require('./routes/post.js');
 const commentRoutes = require('./routes/comment.js');
-
-
+const aimerRoutes = require('./routes/aimer.js');
+const dislikeRoutes = require('./routes/dislike.js');
 
 
 app.use(bodyParser.json());
@@ -23,7 +23,8 @@ app.use(express.json());
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/comment', commentRoutes);
-
+app.use('/api/aimer', aimerRoutes);
+app.use('/api/dislike', dislikeRoutes);
 app.listen(4000, () => {
   console.log(`🚀 application ready at 4000`);
 });

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Aimer from "./Aimer";
 
 const Post = ({ post, setPosts , posts}) => {
 
@@ -23,11 +24,12 @@ console.log("comments", comments)
   const userId = localStorage.getItem("USERID");
   const userName = localStorage.getItem("NAME");
   const userLastName = localStorage.getItem("LASTNAME");
+  const userRole = localStorage.getItem("ROLE");
   return (
         <div>
         <div style={{ display: 'flex'}}>
           <p>{post.description}</p>
-          {post.userId == userId && <button onClick={async () => {
+          {(post.userId == userId || userRole=="admin") && <button onClick={async () => {
                 const result = await axios.delete(
                   "http://localhost:4000/api/post/" + post.postId,{ headers: {
                     authorization: `bearer ${localStorage.getItem("TOKEN")}`
@@ -43,6 +45,8 @@ console.log("comments", comments)
           
         </div>
         <div>
+    
+
 
         {comments.map((commentItem) => {
             return <div>
@@ -50,7 +54,7 @@ console.log("comments", comments)
                 <p>{commentItem.comment}</p>
                 <p>{commentItem.prenom} { commentItem.nom}</p>
             </div>
-            {commentItem.userId == userId && <button onClick={async () => {
+            {(commentItem.userId == userId || userRole==="admin") && <button onClick={async () => {
                 const result = await axios.delete(
                   "http://localhost:4000/api/comment/" + commentItem.commentId,{ headers: {
                     authorization: `bearer ${localStorage.getItem("TOKEN")}`
@@ -66,7 +70,8 @@ console.log("comments", comments)
             </div>
         })}
         </div>
-        <div style={{ display: 'flex'}}>        <input
+        <div style={{ display: 'flex'}}>      
+          <input
           placeholder="entrer votre commentaire"
           onChange={(e) => setComment(e.target.value)}
         />
@@ -93,6 +98,7 @@ console.log("comments", comments)
             }
         }}>commenter</button>
         </div>
+        <Aimer postId={post.postId} />
         </div>
   );
 };

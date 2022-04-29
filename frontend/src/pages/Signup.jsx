@@ -45,7 +45,7 @@ function Signup () {
 
             />
             <button onClick={async() => {
-        const user = await axios.post('http://localhost:4000/api/user/signup', {email, password,nom,prenom})
+        const user = await axios.post('http://localhost:4000/api/user/signup', {email, password,nom,prenom, role: 'user'})
             navigate("/login")
                 console.log("email =====", email)
                 console.log("password =====", password)

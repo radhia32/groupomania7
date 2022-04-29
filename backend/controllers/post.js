@@ -30,7 +30,7 @@ exports.getAllPosts = (req, res, next) => {
 
 exports.deletePost = (req, res) => {
   db.query(
-    `DELETE FROM posttable WHERE postId = '${req.params.id}' AND userId = '${req.userId}'`,
+    `DELETE FROM posttable WHERE postId = '${req.params.id}'`,
     (error, result) => {
       if (error) {
         res.status(400).json({

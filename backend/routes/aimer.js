@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
-const likeCtrl = require("../controlers/aimer");
+const auth = require("../midleware/auth");
+const aimerCtrl = require("../controllers/aimer");
 
-router.post("/", auth, aimerCtrl.createAimer);
-router.get("/:id", auth, aimertrl.getAimerOfPost);
-
+router.post("/", auth, aimerCtrl.aimer);
+router.get("/:postId", auth, aimerCtrl.getAimerByPostId);
+router.delete("/:postId", auth, aimerCtrl.deleteAimer);
 
 module.exports = router;

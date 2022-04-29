@@ -16,6 +16,7 @@ const isValid = bcrypt.compareSync(password,result[0].password)
           userId: result[0].userId,
           firstName: result[0].nom,
           lastName: result[0].prenom,
+          role: result[0].role,
           token: jwt.sign(
             { userId: result[0].userId },
             "SECRET_KEY",
@@ -36,8 +37,8 @@ const isValid = bcrypt.compareSync(password,result[0].password)
 };
 
 exports.signup = async (req, res) => {
-  const { nom, prenom, email, password } = req.body;
-  if (nom && prenom && email && password) {
+  const { nom, prenom, email, password, role } = req.body;
+  if (nom && prenom && email && password, role) {
     const uniqueEmail = `SELECT * FROM user WHERE email = '${email}'`;
     db.query(uniqueEmail, (error, result) => {
       if (error) {
@@ -45,7 +46,7 @@ exports.signup = async (req, res) => {
       } else if (result.length > 0) {
         return res.status(401).json({ message: 'Cet email est déjà utilisé' });
       } else {
-        return checkEmailPassword(nom, prenom, password, email, res);
+        return checkEmailPassword(nom, prenom, password, email,role, res);
       }
     });
   } else {
@@ -55,10 +56,10 @@ exports.signup = async (req, res) => {
   }
 };
 
-async function checkEmailPassword(nom, prenom, password, email, res) {
+async function checkEmailPassword(nom, prenom, password, email,role, res) {
   const passwordHash = bcrypt.hashSync(password, 10)
-  const sql = `INSERT INTO user (nom, prenom, email, password) VALUES ('${nom}', 
-  '${prenom}', '${email}', '${passwordHash}')`;
+  const sql = `INSERT INTO user (nom, prenom, email, password, role) VALUES ('${nom}', 
+  '${prenom}', '${email}', '${passwordHash}','${role}')`;
   try {
     db.query(sql, (error) => {
       if (error) {
@@ -70,3 +71,27 @@ async function checkEmailPassword(nom, prenom, password, email, res) {
     return res.status(500).json({ loggedIn: false, message: 'Erreur' });
   }
 }
+
+exports.getAllUsers = (req, res, next) => {
+  const sql =
+    'SELECT * FROM user' 
+  db.query(sql, (error, result) => {
+    if (error) {
+    }
+    res.send({ status: 200, result });
+  });
+};
+// profil user fih les posts mte user heka
+exports.deleteUser = (req, res) => {
+  db.query(
+    `DELETE FROM user WHERE userId = '${req.params.userId}'`,
+    (error, result) => {
+      if (error) {
+        res.status(400).json({
+          error,
+        });
+      } else if (result.affectedRows) return res.status(200).json(result);
+      return res.status(401).json({ message: "tu n'est pas autorisé" });
+    }
+  );
+};
