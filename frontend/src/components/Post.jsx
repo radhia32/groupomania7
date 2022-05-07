@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Aimer from "./Aimer";
+import Dislike from "./Dislike";
 
 const Post = ({ post, setPosts , posts}) => {
 
@@ -27,8 +28,10 @@ console.log("comments", comments)
   const userRole = localStorage.getItem("ROLE");
   return (
         <div>
-        <div style={{ display: 'flex'}}>
+        <div >
+          <div style={{ display: 'flex'}}>
           <p>{post.description}</p>
+     
           {(post.userId == userId || userRole=="admin") && <button onClick={async () => {
                 const result = await axios.delete(
                   "http://localhost:4000/api/post/" + post.postId,{ headers: {
@@ -42,12 +45,11 @@ console.log("comments", comments)
                 );
                 setPosts(filtredPosts);
               }}>delete</button>}
-          
+          </div>
+               <img style={{width: "300px", height: "300px"}} src={post.image} />
         </div>
         <div>
     
-
-
         {comments.map((commentItem) => {
             return <div>
             <div style={{ display: "flex", justifyContent: 'center'}}>
@@ -75,6 +77,7 @@ console.log("comments", comments)
           placeholder="entrer votre commentaire"
           onChange={(e) => setComment(e.target.value)}
         />
+    
         <button disabled={!comment} onClick={async () => {
             if(comment) {
                 const newComment= await axios.post(
@@ -98,7 +101,11 @@ console.log("comments", comments)
             }
         }}>commenter</button>
         </div>
+        <div>
+
         <Aimer postId={post.postId} />
+        <Dislike postId={post.postId} />
+        </div>
         </div>
   );
 };

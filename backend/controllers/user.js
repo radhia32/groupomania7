@@ -81,7 +81,7 @@ exports.getAllUsers = (req, res, next) => {
     res.send({ status: 200, result });
   });
 };
-// profil user fih les posts mte user heka
+// profil user des postes user
 exports.deleteUser = (req, res) => {
   db.query(
     `DELETE FROM user WHERE userId = '${req.params.userId}'`,

@@ -6,10 +6,12 @@ import Posts from './pages/Posts';
 import Users from './pages/Users';
 import './App.css';
 
+
 const App = () => {
  
   return (
 <BrowserRouter>
+
 <Routes>
   <Route exact path="/login" element={<Login />} />
   <Route exact path="/signup" element={<Signup />} />

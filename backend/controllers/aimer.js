@@ -25,10 +25,13 @@ exports.getAimerByPostId = (req, res, next) => {
   });
 };
 exports.deleteAimer = (req, res) => {
+  console.log("hereeeeee")
   db.query(
-    `DELETE FROM aimer WHERE userid ='${req.userId}' AND postid='${req.params.postId}`,
+    `DELETE FROM aimer WHERE userid = '${req.userId}' AND postid = '${req.params.postId}'`,
     (error, result) => {
+      console.log("2")
       if (error) {
+        console.log("errr", error)
         res.status(400).json({
           error,
         });

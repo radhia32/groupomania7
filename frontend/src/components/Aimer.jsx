@@ -17,9 +17,9 @@ const Aimer = ({ postId}) => {
     getAimer();
   }, []);
 
-console.log("aimer", aimer)
-  const userId = localStorage.getItem("USERID");
-  const isAimer = aimer?.find((item) => item.userid ==userId && item.postid== postId)
+const userId = localStorage.getItem("USERID");
+const isAimer = aimer?.find((item) => Number(item.userid) ===Number(userId) && Number(item.postid)=== Number(postId))
+
   return (
       <div>
      
@@ -33,14 +33,17 @@ console.log("aimer", aimer)
                    }
                  );
                  const filtredAimer= aimer.filter(
-                    (aimerItem) => aimerItem.postid !=postId && aimer.userid !=userId
+                    (aimerItemValue) =>
+        
+                      !(( Number(aimerItemValue.postid) ===Number(postId) ) && (Number(aimerItemValue.userid) ===Number(userId)))
+                    
                   );
+                  console.log("filteredaimer", filtredAimer)
                  console.log("newPost", newAimer.data); 
         
-  
+
                  setAimer(filtredAimer)
-  
-              
+     
           }}
           >je n'aime pas </button>
            :
@@ -58,11 +61,10 @@ console.log("aimer", aimer)
            );
 
            console.log("newPost", newAimer.data); 
-           const newAddAimer = { postid: postId,userid: userId};
+           const newAddAimer = { userid: Number(userId),postid: Number(postId)};
 
            setAimer([...aimer, newAddAimer])
-
-        
+       
     }}
     >j'aime </button>}
     {aimer.length}

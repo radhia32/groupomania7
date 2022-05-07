@@ -26,7 +26,8 @@ exports.getDislikeByPostId = (req, res, next) => {
 };
 exports.deleteDislike= (req, res) => {
   db.query(
-    `DELETE FROM dislike WHERE userId = '${req.userId}' AND postId='${req.params.postId}`,
+ 
+    `DELETE FROM dislike WHERE userid = '${req.userId}' AND postid = '${req.params.postId}'`,
     (error, result) => {
       if (error) {
         res.status(400).json({

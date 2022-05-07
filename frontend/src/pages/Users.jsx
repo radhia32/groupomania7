@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import Header from '../components/Header';
 
 const Users = () => {
   const [users, setUsers]=useState([]);
@@ -22,6 +22,7 @@ const Users = () => {
   const userId = localStorage.getItem("USERID");
   return (
     <div className="app">
+      <Header />
 <table>
   <tr>
     <th>Prenom</th>
