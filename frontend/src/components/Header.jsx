@@ -1,16 +1,25 @@
 import React from 'react';
+import logo from "../icon-left-font.png"
+const Header = () => { 
+    return(
+    <div className='headerprofil'>
+    
+    <img className="logo" src={logo}/>
+    <div className='header-right'>
 
-const Header = () => {
-   return( <div style={{ display: 'flex', gap:'10px',position: 'relative',
-   marginBottom: '180px',backgroundColor:'red'}}>
-    <a>Home</a>
-    <a>profil</a>
+     <a href='/'>Home</a>
+     {localStorage.getItem("ROLE") ==="admin" &&<a href='/users'>admin</a>}
+
     <p>{localStorage.getItem("NAME")} {localStorage.getItem("LASTNAME")}</p>
     <button onClick={() => {
         localStorage.clear()
-        window.location.replace("/login")
-    }}>deconexion</button>
+        window.location.replace("/")
+    }}>deconnexion</button>
+
+    </div>
+
     </div>)
+
 }
 
 export default Header

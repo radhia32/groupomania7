@@ -1,7 +1,7 @@
 const bcrypt= require( 'bcryptjs');
 const db = require('../db');
 const jwt = require('jsonwebtoken');
-
+require('dotenv').config();
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
@@ -19,7 +19,7 @@ const isValid = bcrypt.compareSync(password,result[0].password)
           role: result[0].role,
           token: jwt.sign(
             { userId: result[0].userId },
-            "SECRET_KEY",
+            process.env.SECRET_KEY,
             {
               expiresIn: '24h',
             }

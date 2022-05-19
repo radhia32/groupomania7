@@ -1,9 +1,10 @@
 const mysql = require('mysql2');
+require('dotenv').config();
 const sql = mysql.createPool({
-  host: "remotemysql.com",
+  host: process.env.HOST,
   user: "d2xdPMlToC",
-  database:"d2xdPMlToC",
-  password: "s6woRImFNQ",
+  database:process.env.DATABASE,
+  password: process.env.PASSWORD,
 
 });
 

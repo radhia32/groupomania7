@@ -11,14 +11,17 @@ function Login () {
         <div>   
    
             <h3>Login</h3>
-            <input 
+            <input
+            className='inputForm'
               name='email'
               placeholder='Entrer votre email'
               value={email} 
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
+               className='inputForm'
               name='password' 
+              type="password"
               placeholder='Entrer votre password'
               value={password}
               // onChange la fonction qui sera executer au moment de saisie
@@ -27,7 +30,9 @@ function Login () {
               onChange={(e) => setPassword(e.target.value)}
 
               />
-<button onClick={async() => {       
+<button 
+className='button-login'
+onClick={async() => {       
 try {const user =await axios.post('http://localhost:4000/api/user/login', {email, password})
 
 if(user.status === 200) {  setError(false)
@@ -37,16 +42,12 @@ if(user.status === 200) {  setError(false)
     localStorage.setItem("NAME", user.data.lastName);
     localStorage.setItem("LASTNAME", user.data.firstName);
     localStorage.setItem("ROLE", user.data.role);
-    navigate("/")}   
-
-console.log("user =====", user)
+    window.location.replace("/")}   
 
 }
 
   catch (err ) {setError(true)
-    console.log(err)
-    console.log("err =====", err)
-    
+   
   }           
             }}>Connexion</button>{error && <p>verifier vos credentiels</p> }
 

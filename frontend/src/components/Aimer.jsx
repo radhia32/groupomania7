@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const Aimer = ({ postId}) => {
+const Aimer = ({ postId }) => {
   const [aimer, setAimer ]= useState([]);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const Aimer = ({ postId}) => {
           authorization: `bearer ${localStorage.getItem("TOKEN")}`
         }
       });
-      console.log("postResult", aimerResult);
+
       setAimer(aimerResult.data.result);
     };
     getAimer();
@@ -22,8 +22,10 @@ const isAimer = aimer?.find((item) => Number(item.userid) ===Number(userId) && N
 
   return (
       <div>
-     
-       {isAimer ?   <button onClick={async () => {   
+
+       {isAimer ?   <button 
+     className="dislike"
+       onClick={async () => {   
                   const newAimer= await axios.delete(
                    "http://localhost:4000/api/aimer/" +postId,
                    {
@@ -38,16 +40,19 @@ const isAimer = aimer?.find((item) => Number(item.userid) ===Number(userId) && N
                       !(( Number(aimerItemValue.postid) ===Number(postId) ) && (Number(aimerItemValue.userid) ===Number(userId)))
                     
                   );
-                  console.log("filteredaimer", filtredAimer)
+                 console.log("filteredaimer", filtredAimer)
                  console.log("newPost", newAimer.data); 
         
 
                  setAimer(filtredAimer)
      
           }}
-          >je n'aime pas </button>
+          >j'aime </button>
            :
-            <button onClick={async () => {   
+            <button 
+        
+            className="jaime"
+            onClick={async () => {   
             const newAimer= await axios.post(
              "http://localhost:4000/api/aimer",
 {
@@ -66,6 +71,8 @@ const isAimer = aimer?.find((item) => Number(item.userid) ===Number(userId) && N
            setAimer([...aimer, newAddAimer])
        
     }}
+
+
     >j'aime </button>}
     {aimer.length}
       </div>

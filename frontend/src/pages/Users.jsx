@@ -25,17 +25,17 @@ const Users = () => {
       <Header />
 <table>
   <tr>
-    <th>Prenom</th>
     <th>Nom</th>
     <th>Email</th>
     <th>Actions</th>
   </tr>
   {users?.map((user) => (
         user.userId !=userId &&  <tr style={{ textAlign: 'center'}}>
-              <td>{user.prenon}</td>
+        
               <td>{user.nom}</td>
               <td>{user.email}</td>
-              <td>{userRole==="admin" &&<button
+              <td>{userRole==="admin" &&<button style={{ color:'red'}}
+            
               onClick={async () => {
                 const result = await axios.delete(
                   "http://localhost:4000/api/user/" +user.userId,{ headers: {
@@ -54,7 +54,6 @@ const Users = () => {
       ))}
 
 </table>
-
     </div>
   );
 };
