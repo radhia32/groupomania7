@@ -24,7 +24,6 @@ app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/comment', commentRoutes);
 app.use('/api/aimer', aimerRoutes);
-app.use('/api/dislike', dislikeRoutes);
 app.listen(port, () => {
   console.log(`🚀 application ready at 4000`);
 });

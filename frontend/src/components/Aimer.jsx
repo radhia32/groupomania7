@@ -22,7 +22,7 @@ const isAimer = aimer?.find((item) => Number(item.userid) ===Number(userId) && N
 
   return (
       <div>
-
+        
        {isAimer ?   <button 
      className="dislike"
        onClick={async () => {   
