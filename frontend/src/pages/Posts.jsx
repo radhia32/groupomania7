@@ -23,12 +23,15 @@ const Posts = () => {
   const onChangeImage = (e) => setFile(e.target.files[0]);
 
   const userId = localStorage.getItem("USERID");
+ const sortedPosts = [...posts].reverse()
+ console.log("sorted", sortedPosts)
   if(!userId) {
     return <Auth />
   }
   return (
     <div>
       <Header />
+      
       <div className="new-post">
         <div className="inputs-post-container">
          
@@ -64,9 +67,9 @@ const Posts = () => {
               // creation d'un objet dedans j'ai mis la description saisie et l'id de la
               // nouvelle pub ajoutée, cet objet sera ajouter dans le tableau posts
               // pour l'affiché avec tous les publication
-              const newAddedPost = { description,postId: newPost.data.post.insertId,userId, image: 'http://localhost:4000/images/' + file.name };
+              const newAddedPost = { createdat: new Date(), description,postId: newPost.data.post.insertId,userId, image: 'http://localhost:4000/images/' + file.name };
 
-              setPosts([newAddedPost, ...posts]);
+              setPosts([...posts,newAddedPost, ...posts]);
               setDescription("");
               document.getElementById('desc').value=""
               document.getElementById('file').value=""
@@ -79,8 +82,8 @@ const Posts = () => {
           partager
         </button>
       </div>
-      {posts?.map((post) => (
-        <Post post={post} posts={posts} setPosts={setPosts}/>
+      {sortedPosts?.map((post) => (
+        <Post post={post} posts={posts} key={post.postId} setPosts={setPosts}/>
 
       ))}
     </div>

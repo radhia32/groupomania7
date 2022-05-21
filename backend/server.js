@@ -8,7 +8,6 @@ const userRoutes = require('./routes/user.js');
 const postRoutes = require('./routes/post.js');
 const commentRoutes = require('./routes/comment.js');
 const aimerRoutes = require('./routes/aimer.js');
-const dislikeRoutes = require('./routes/dislike.js');
 
 require('dotenv').config();
 app.use(bodyParser.json());

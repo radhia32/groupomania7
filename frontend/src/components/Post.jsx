@@ -26,13 +26,17 @@ const Post = ({ post, setPosts , posts}) => {
   const userName = localStorage.getItem("NAME");
   const userLastName = localStorage.getItem("LASTNAME");
   const userRole = localStorage.getItem("ROLE");
-
+  var date = new Date(post.createdat);
+  var dateStr =
+    ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+    ("00" + date.getDate()).slice(-2) + "/" +
+    date.getFullYear()
   return (
         <div className="post-container">
         <div >
           <div className="post-header">
           <p>{post.description}</p>
-     
+          <p>{dateStr}</p>
           {(post.userId == userId || userRole=="admin") && <button onClick={async () => {
                 const result = await axios.delete(
                   "http://localhost:4000/api/post/" + post.postId,{ headers: {
@@ -47,7 +51,7 @@ const Post = ({ post, setPosts , posts}) => {
                 setPosts(filtredPosts);
               }}>delete</button>}
           </div>
-               <img className="img-post" src={post.image} />
+               <img className="img-post" alt="" src={post.image} />
         </div>
         <div>
     

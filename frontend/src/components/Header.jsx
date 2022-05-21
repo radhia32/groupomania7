@@ -4,11 +4,11 @@ const Header = () => {
     return(
     <div className='headerprofil'>
     
-    <img className="logo" src={logo}/>
+    <img className="logo" alt="" src={logo}/>
     <div className='header-right'>
 
-     <a href='/'>Home</a>
-     {localStorage.getItem("ROLE") ==="admin" &&<a href='/users'>admin</a>}
+     <a className="header-link" href='/'>Home</a>
+     {localStorage.getItem("ROLE") ==="admin" &&<a className='header-link' href='/users'>admin</a>}
 
     <p>{localStorage.getItem("NAME")} {localStorage.getItem("LASTNAME")}</p>
     <button onClick={() => {

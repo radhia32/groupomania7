@@ -6,9 +6,11 @@ const getImageUrl = (req) =>
 
 
 exports.createPost = (req, res, next) => {
+console.log("error",req.body)
+console.log("userId",req.userId)
 const file = getImageUrl(req)
 console.log("file", file)
-  const query = `INSERT INTO posttable (description, image, userId) VALUES ('${req.body.description}', '${file}', '${req.userId}')`;
+  const query = `INSERT INTO posttable (description, image, userId, createdat) VALUES ('${req.body.description}', '${file}', '${req.userId}', NOW())`;
 
   db.query(query, (error, result) => {
     if (error) {
