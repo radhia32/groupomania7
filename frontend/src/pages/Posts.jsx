@@ -23,8 +23,8 @@ const Posts = () => {
   const onChangeImage = (e) => setFile(e.target.files[0]);
 
   const userId = localStorage.getItem("USERID");
- const sortedPosts = [...posts].reverse()
- console.log("sorted", sortedPosts)
+  const sortedPosts = [...posts].reverse()
+  console.log("sorted", sortedPosts)
   if(!userId) {
     return <Auth />
   }
@@ -69,7 +69,7 @@ const Posts = () => {
               // pour l'affiché avec tous les publication
               const newAddedPost = { createdat: new Date(), description,postId: newPost.data.post.insertId,userId, image: 'http://localhost:4000/images/' + file.name };
 
-              setPosts([...posts,newAddedPost, ...posts]);
+              setPosts([...posts,newAddedPost])
               setDescription("");
               document.getElementById('desc').value=""
               document.getElementById('file').value=""
