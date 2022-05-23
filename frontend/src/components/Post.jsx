@@ -56,7 +56,8 @@ const Post = ({ post, setPosts , posts}) => {
         <div>
     
         {comments.map((commentItem) => {
-            return   <div className="comment-list">
+            return   <div className="comment-list" key={commentItem.commentId}>
+             
                 <p>{commentItem.comment}</p>
                 <p>{commentItem.prenom} { commentItem.nom}</p>
             
